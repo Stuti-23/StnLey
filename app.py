@@ -193,7 +193,9 @@ def chatbot_response(user):
                 #flag = True
 
 
-from flask import Flask, render_template, request
+from flask import Flask
+from flask import render_template
+from flask import request
 app = Flask(__name__)
 app.static_folder = 'static'
 @app.route("/")
