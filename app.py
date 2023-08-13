@@ -6,8 +6,6 @@ from nltk.corpus import wordnet
 from pymongo import MongoClient
 from sklearn.metrics.pairwise import cosine_distances
 from nltk.stem import WordNetLemmatizer
-import enchant
-print("a")
 from pymongo import MongoClient
 
 # Replace with your connection string
