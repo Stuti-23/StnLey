@@ -3,7 +3,7 @@ Flask==1.1.2
 nlp_utils==0.6.2
 nltk>=3.5,<3.8
 pandas>=1.0.5,<1.4.4
-pyenchant==3.2.2
+pyenchant
 pymongo==4.4.1
 scikit-learn>=0.23.1,<1.0.2
 gunicorn==20.1.0
