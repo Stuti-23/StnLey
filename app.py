@@ -1,4 +1,6 @@
 import nltk
+nltk.data.path.append("/path/to/nltk_data")
+nltk.download('omw-1.4')
 nltk.download('wordnet')
 import string
 import pandas as pd
