@@ -2,7 +2,6 @@ import nltk
 import string
 import pandas as pd
 import nlp_utils as nu
-import matplotlib.pyplot as plt
 from nltk.corpus import wordnet
 from pymongo import MongoClient
 from sklearn.metrics.pairwise import cosine_distances
