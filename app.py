@@ -1,4 +1,5 @@
 import nltk
+nltk.download('wordnet')
 import string
 import pandas as pd
 import nlp_utils as nu
