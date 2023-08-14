@@ -10,10 +10,9 @@ from pymongo import MongoClient
 from sklearn.metrics.pairwise import cosine_distances
 from nltk.stem import WordNetLemmatizer
 from pymongo import MongoClient
-
+from connection import *
 # Replace with your connection string
-connection_string = "mongodb+srv://asmitajainshirley:stnley1@cluster0.f3wcvmt.mongodb.net/?retryWrites=true&w=majority"
-
+connection_string = connectionstring
 # Connect to the MongoDB Atlas cluster
 client = MongoClient(connection_string)
 
@@ -48,8 +47,8 @@ for word in text.split():
     expanded_words.append(contractions.fix(word))
 
 expanded_text = ' '.join(expanded_words)
-print('Original text: ' + text)
-print('Expanded_text: ' + expanded_text)
+#print('Original text: ' + text)
+#print('Expanded_text: ' + expanded_text)
 
 
 def correction(input_text):
@@ -86,7 +85,7 @@ def correction(input_text):
         "whut": "what", "whr": "where",
         "envrnmnt": "environment", "lst": "last", "rq": "require", "cllg": "college", "collage": "college",
         "councelling": "counselling", "counselling": "counselling", "counseling": "counselling",
-        "counceling": "counselling",
+        "counceling": "counselling", "hod" : "head of the department"
 
     }
 
@@ -102,16 +101,18 @@ def correction(input_text):
 
     return processed_input
 
-ans =correction("r")
-print(ans)
+#ans =correction("r")
+#print(ans)
 
 lemmatizer = WordNetLemmatizer()
 
 
 # answer= chatbot_data.find("answer": {})
 from sklearn.feature_extraction.text import TfidfVectorizer
+
 tfidf = TfidfVectorizer()
 factors = tfidf.fit_transform(df['Question']).toarray() #make df of questions only!
+
 #here, fetch column 'Question' and vectorise
 tfidf.get_feature_names_out()
 
@@ -167,7 +168,7 @@ def chatbot_response(user):
                     "Yo stnley", "Hi there stnley",
                     "Hey there stnley", "hi stnley ", "hola stnley", "bonjour stnley", "buongiorno stnley",
                     "hallo stnley",
-                    "ciao stnley", "namaste stnley", "heyy", "hayo"]:
+                    "ciao stnley", "namaste stnley", "heyy", "hayo","helo"]:
             #flag = True
             return random.choice(conversation_starters)
 
@@ -181,21 +182,19 @@ def chatbot_response(user):
             if (response['score'] > 0.3):
 
                 #flag = True  # fetching answer
-                ans= response['Answer']
+                ans = response['Answer']
                 string="\n for more information you can contact :- Admission related enquirDr. Manish Dixit/Ms. Jyotsana Singh Mob.: 9343250503, 9425460166  \n ims related query --Shri. Atul Chauhan,07512409304  ims@mitsgwalior.in \n visit website -mitsgwalior.in/contactus.php "
-                string1=ans + string
+                string1 = ans + string
                 return ans
 
             else:
-
-                return "StnLey : Please rephrase your Question \n or you can contact :- \n Admission related enquirDr. Manish Dixit/Ms. Jyotsana Singh Mob.: 9343250503, 9425460166  \n ims related query --Shri. Atul Chauhan,07512409304  ims@mitsgwalior.in \n visit website -mitsgwalior.in/contactus.php "
                 # change1 260723
                 new_question = {'Question': user, 'Answer': 'Sorry, I do not have an answer to this question yet.'}
                 collection.insert_one(new_question)
-                collection.insert
+                return "StnLey : Please rephrase your Question"
                 #flag = True
 
-
+#flask integration:
 from flask import Flask
 from flask import render_template
 from flask import request
